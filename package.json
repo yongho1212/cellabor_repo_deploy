@@ -1,0 +1,34 @@
+{
+  "name": "cellabor-repo",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "mobile:android": "turbo run mobile:android",
+    "mobile:ios": "turbo run mobile:ios",
+    "mobile:start": "turbo run mobile:start"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/runtime": "^7.25.6",
+    "@types/firebase": "^2.4.32",
+    "prettier": "^3.2.5",
+    "turbo": "^2.1.2",
+    "typescript": "^5.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@repo/ui": "*",
+    "firebase": "^10.13.2",
+    "@egjs/react-flicking": "^4.11.4"
+  }
+}

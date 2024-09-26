@@ -1,0 +1,340 @@
+
+/* 여기부터 */
+
+.page {
+  font-family: Arial, sans-serif;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding-top: 80px;
+}
+
+/* Header Section */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* 헤더가 다른 요소들보다 위에 위치하도록 설정 */
+}
+
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav ul li {
+  display: inline;
+}
+
+.nav ul li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+}
+
+.nav ul li a:hover {
+  color: #ff3366;
+}
+.authButtons {
+  display: flex;
+  align-items: center;
+}
+
+.signinBtn {
+  background-color: transparent;
+  border: 1px solid #ff3366;
+  color: #ff3366;
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.signupBtn {
+  background-color: #ff3366;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.signinBtn:hover, .signupBtn:hover {
+  opacity: 0.8;
+}
+
+.section1 {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(236, 240, 249, 0.00) 0%, #F9ECF8 100%), var(--White, #FFF);  text-align: center;
+  padding: 103px 0px 0px 0px;
+}
+
+.section1 h2 {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 18px;
+}
+
+.section1 h1 {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 130%; /* 78px */
+  margin-bottom: 24px;
+}
+
+.primaryBtn {
+  padding: 15px 30px;
+  background-color: #E2004C;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 92px 0px 0px 0px;
+}
+
+.slickSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row; /* 가로 정렬 */
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.concerns {
+  width: 1080px;
+  margin-top: 107px;
+  text-align: start;
+}
+
+.concerns h2 {
+  color: #000;
+  font-family: Pretendard;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+.concernCards {
+  display: flex;
+  flex-direction: column;
+  height: 550px;
+  /* justify-content: space-around; */
+  margin-top: 50px;
+}
+
+.concernInline {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+/* .concernCard {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+} */
+
+.cta {
+  width: 100%;
+  background: #F8F8F8;
+  padding: 120px 50px 68px 50px;
+  text-align: center;
+}
+
+.cta h2 {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+.cta p {
+  margin-top: 20px;
+  color: var(--Gray_400, var(--Gray_600, #94999E));
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 28px;
+}
+
+.textBox span {
+  background: linear-gradient(90deg, #F2004D 35.68%, #FF7E80 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: Pretendard;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+  margin-left: 18px;
+}
+
+.textBox h2 {
+  color: #000;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+.textBox {
+  display: flex;
+  justify-content: center;
+}
+
+.ctaCards {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.ctaCard {
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.subscribe {
+  width: 100%;
+
+  background: linear-gradient(180deg, rgba(236, 240, 249, 0.00) 0%, #F9ECF8 100%), var(--White, #FFF);  color: white;
+  padding: 120px 420px 162px 420px;
+  text-align: center;
+}
+
+.emailBox {
+  width: 1080px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White, #FFF);
+  padding: 49px 48px 59px 48px;
+  margin-top: 55px;
+}
+
+.emailBox p {
+  color: #1E1E1E;
+  font-family: Pretendard;
+  font-size: 26px;
+  font-style: normal;
+  text-align: start;
+  font-weight: 700;
+  line-height: var(--32, 32px); /* 123.077% */
+  margin-bottom: 30px;
+}
+
+.emailBoxInput {
+  display: flex;
+  height: 70;
+  align-items: center;
+}
+
+.input {
+  padding: 10px;
+  height: 70px;
+  border-radius: 10px;
+  border: 1px solid var(--Gray_500, #B5B9BE);
+  width: 821px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.subscribeBtn {
+  background-color: #F2004D;
+  border: none;  
+  border-radius: 10px;
+  height: 70px;
+  color: #fff;
+  padding: 10px 20px;
+  width: 150px;
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--White, #FFF);
+  font-family: Pretendard;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: var(--24, 24px);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.footer p {
+  margin-top: 20px;
+  color: var(--Gray_500, var(--Gray_700, #6B6F76));
+  font-family: Pretendard;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: var(--16, 16px);
+}
+
+.carouselContainer {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carouselItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 10px;
+}
+
+.carouselItem img {
+  height: auto;
+  object-fit: cover;
+  pointer-events: none;
+}
