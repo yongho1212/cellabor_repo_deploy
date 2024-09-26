@@ -243,8 +243,12 @@
   width: 100%;
 
   background: linear-gradient(180deg, rgba(236, 240, 249, 0.00) 0%, #F9ECF8 100%), var(--White, #FFF);  color: white;
-  padding: 120px 420px 162px 420px;
+  /*padding: 120px 420px 162px 420px;*/
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .emailBox {
@@ -285,7 +289,7 @@
 
 .subscribeBtn {
   background-color: #F2004D;
-  border: none;  
+  border: none;
   border-radius: 10px;
   height: 70px;
   color: #fff;
