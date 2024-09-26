@@ -32,9 +32,8 @@ const nextConfig = {
     webpack: (config) => {
         config.resolve.alias = {
             ...(config.resolve.alias || {}),
-            // react-native -> react-native-web 변환
             "react-native$": "react-native-web",
-            '@repo/ui': path.resolve(__dirname, '../../packages/ui'), // 이 부분에서 __dirname 사용
+            '@repo/ui': path.resolve(__dirname, '../../packages/ui'),
 
         };
         config.resolve.extensions = [
