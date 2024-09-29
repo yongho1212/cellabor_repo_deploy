@@ -2,7 +2,15 @@
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "jsx": "react-native",
-    "types": ["react-native"]
+    "types": ["react-native"],
+    "baseUrl": ".",
+    "paths": {
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/core/*": ["../../packages/core/src/*"],
+      "@repo/types/*": ["../../packages/types/src/*"],
+      "@repo/utils/*": ["../../packages/utils/src/*"],
+      "@repo/styles/*": ["../../packages/styles/src/*"]
+    }
   },
   "include": ["src/**/*", "index.js", "App.tsx"],
   "exclude": ["node_modules", "babel.config.js", "metro.config.js", "jest.config.js"]

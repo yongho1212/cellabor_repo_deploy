@@ -4,7 +4,8 @@
     "plugins": [{"name": "next"}],
     "baseUrl": ".",
     "paths": {
-      "@repo/ui/*": ["../../packages/ui/src/*"]
+      "@repo/ui/*": ["../../packages/ui/src/*"],
+      "@repo/*": ["../../packages/*"]
     }
   },
   "include": [

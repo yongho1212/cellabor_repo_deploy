@@ -8,6 +8,9 @@ const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    images:{
+        domains: ['lh3.googleusercontent.com'],
+    },
     distDir: '.next',
     experimental: {
         turbo: {
@@ -34,6 +37,7 @@ const nextConfig = {
             ...(config.resolve.alias || {}),
             "react-native$": "react-native-web",
             '@repo/ui': path.resolve(__dirname, '../../packages/ui'),
+            '@repo': path.resolve(__dirname, '../../packages'),
 
         };
         config.resolve.extensions = [

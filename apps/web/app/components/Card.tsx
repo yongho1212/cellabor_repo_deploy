@@ -8,14 +8,15 @@ interface CardProps {
 
 export default function Card({ post }: CardProps) {
     return (
-        <Link href={`/posts/${post.id}`} className="block w-full">
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="relative w-full pt-[66.67%]"> {/* 3:2 aspect ratio */}
+        <Link href={`/posts/${post.id}`} className="block w-full z-10">
+            <div className="bg-white rounded-lg shadow-md overflow-hidden z-10">
+                <div className="relative w-full pt-[66.67%] z-10"> {/* 3:2 aspect ratio */}
                     <Image
                         src={post.images[0] as string}
                         alt={post.title}
-                        layout="fill"
-                        objectFit="cover"
+                        fill
+                        style={{zIndex:10}}
+                        // sizes="(max-width: 768px) 100vw, 33vw"
                     />
                 </div>
                 <div className="p-4">

@@ -18,7 +18,7 @@
     "target": "ES2022",
     "baseUrl": ".",
     "paths": {
-      "@repo/ui/*": ["packages/ui/src/*"]
+      "@repo/*": ["packages/*"]
     }
   }
 }

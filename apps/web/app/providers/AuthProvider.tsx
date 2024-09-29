@@ -16,8 +16,6 @@ export const ClientAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
-    console.log(user, 'USER')
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setUser(user);
