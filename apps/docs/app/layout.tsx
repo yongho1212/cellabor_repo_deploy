@@ -14,8 +14,9 @@ import './globals.css';
 // });
 
 export const metadata: Metadata = {
-    title: 'Cellabor',
+    title: 'Cell2abor',
     description: '원하는 스타일의 촬영메이트를 쉽게 찾아보세요',
+    keywords: ['촬영', '메이트', '스타일', '사진', '영상'],
     // icons: {
     //     icon: '/favicon.ico', // favicon 파일 경로
     // },
