@@ -19,12 +19,12 @@ import Flicking from '@egjs/react-flicking';
 import '@egjs/react-flicking/dist/flicking.css';
 import { AutoPlay } from '@egjs/flicking-plugins';
 
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import { doc, getDoc, setDoc, getFirestore } from 'firebase/firestore';
-
-
+import ReactGA from 'react-ga4';
 
 // Firebase 프로젝트 설정
+
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
     authDomain: process.env.NEXT_PUBLIC_FB_AUTH_DOMAIN,
@@ -33,9 +33,14 @@ const firebaseConfig = {
     messagingSenderId: process.env.NEXT_PUBLIC_FB_MESSAGING_SENDERT_ID,
     appId: process.env.NEXT_PUBLIC_FB_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID,
-  };
-console.log(firebaseConfig)
+};
+console.log(firebaseConfig);
 
+const gaTrackingId = process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID;
+
+if (gaTrackingId) {
+    ReactGA.initialize(gaTrackingId);
+}
 // Firebase 초기화
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -51,6 +56,15 @@ export default function Home() {
         }),
     ];
 
+    useEffect(() => {
+        if (gaTrackingId) {
+            ReactGA.send({
+                hitType: 'pageview',
+                page: window.location.pathname,
+            });
+        }
+    }, []);
+
     const Carousel = () => {
         return (
             <div className={styles.carouselContainer}>
@@ -65,22 +79,42 @@ export default function Home() {
                 >
                     <div className={styles.carouselItem}>
                         <div className={styles.imageWrapper}>
-                            <Image src={mockupImage1} alt="mockupImage1" layout="fill" objectFit="contain" />
+                            <Image
+                                src={mockupImage1}
+                                alt="mockupImage1"
+                                layout="fill"
+                                objectFit="contain"
+                            />
                         </div>
                     </div>
                     <div className={styles.carouselItem}>
                         <div className={styles.imageWrapper}>
-                            <Image src={mockupImage2} alt="mockupImage2" layout="fill" objectFit="contain" />
+                            <Image
+                                src={mockupImage2}
+                                alt="mockupImage2"
+                                layout="fill"
+                                objectFit="contain"
+                            />
                         </div>
                     </div>
                     <div className={styles.carouselItem}>
                         <div className={styles.imageWrapper}>
-                            <Image src={mockupImage3} alt="mockupImage3" layout="fill" objectFit="contain" />
+                            <Image
+                                src={mockupImage3}
+                                alt="mockupImage3"
+                                layout="fill"
+                                objectFit="contain"
+                            />
                         </div>
                     </div>
                     <div className={styles.carouselItem}>
                         <div className={styles.imageWrapper}>
-                            <Image src={mockupImage4} alt="mockupImage4" layout="fill" objectFit="contain" />
+                            <Image
+                                src={mockupImage4}
+                                alt="mockupImage4"
+                                layout="fill"
+                                objectFit="contain"
+                            />
                         </div>
                     </div>
                 </Flicking>
@@ -103,11 +137,11 @@ export default function Home() {
             const userDocRef = doc(db, 'reserve', email);
             await setDoc(userDocRef, {
                 email: email,
-                timestamp: new Date()
+                timestamp: new Date(),
             });
 
             alert('이메일이 성공적으로 저장되었습니다: ' + email);
-            setEmail('')
+            setEmail('');
         } catch (error) {
             console.error('Error adding email:', error);
             alert('이메일 저장 실패');
@@ -159,18 +193,34 @@ export default function Home() {
                 <div className={styles.concernCards}>
                     <div className={styles.concernInline}>
                         <div className={styles.concernCard}>
-                            <Image src={concernStyle} alt="concernStyle" className={styles.commonImage}/>
+                            <Image
+                                src={concernStyle}
+                                alt="concernStyle"
+                                className={styles.commonImage}
+                            />
                         </div>
                         <div className={styles.concernCard}>
-                            <Image src={concernCost} alt="concernCost" className={styles.commonImage}/>
+                            <Image
+                                src={concernCost}
+                                alt="concernCost"
+                                className={styles.commonImage}
+                            />
                         </div>
                     </div>
                     <div className={styles.concernInline}>
                         <div className={styles.concernCard}>
-                            <Image src={concernSell} alt="concernSell" className={styles.commonImage}/>
+                            <Image
+                                src={concernSell}
+                                alt="concernSell"
+                                className={styles.commonImage}
+                            />
                         </div>
                         <div className={styles.concernCard}>
-                            <Image src={concernGrowth} alt="concernGrowth" className={styles.commonImage}/>
+                            <Image
+                                src={concernGrowth}
+                                alt="concernGrowth"
+                                className={styles.commonImage}
+                            />
                         </div>
                     </div>
                 </div>

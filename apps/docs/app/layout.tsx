@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 // import localFont from "next/font/local";
-import "./globals.css";
+import Script from 'next/script';
+
+import './globals.css';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -12,22 +14,40 @@ import "./globals.css";
 // });
 
 export const metadata: Metadata = {
-  title: "Cellabor",
-  description: "원하는 스타일의 촬영메이트를 쉽게 찾아보세요",
+    title: 'Cellabor',
+    description: '원하는 스타일의 촬영메이트를 쉽게 찾아보세요',
+    // icons: {
+    //     icon: '/favicon.ico', // favicon 파일 경로
+    // },
 };
 
 export default function RootLayout({
-  children,
+    children,
 }: Readonly<{
-  children: React.ReactNode;
+    children: React.ReactNode;
 }>) {
-  return (
-    <html lang="ko">
-      <body
-          // className={`${geistSans.variable} ${geistMono.variable}`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+    return (
+        <html lang="ko">
+            <head>
+                {/* Google Analytics gtag.js */}
+                <Script
+                    async
+                    src="https://www.googletagmanager.com/gtag/js?id=G-38H3CDXCLJ"
+                ></Script>
+                <Script id="google-analytics">
+                    {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-38H3CDXCLJ');
+          `}
+                </Script>
+            </head>
+            <body
+            // className={`${geistSans.variable} ${geistMono.variable}`}
+            >
+                {children}
+            </body>
+        </html>
+    );
 }
