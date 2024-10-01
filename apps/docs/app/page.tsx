@@ -20,7 +20,9 @@ import '@egjs/react-flicking/dist/flicking.css';
 import { AutoPlay } from '@egjs/flicking-plugins';
 
 import { initializeApp } from "firebase/app";
-import { collection, addDoc, getFirestore } from 'firebase/firestore';
+import { doc, getDoc, setDoc, getFirestore } from 'firebase/firestore';
+
+
 
 // Firebase 프로젝트 설정
 const firebaseConfig = {
@@ -32,17 +34,7 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FB_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID,
   };
-
-
-//   const firebaseConfig = {
-//     apiKey: "AIzaSyBrya8vCLiyjiN7xoDmrsxeA93qhXXJCSQ",
-//     authDomain: "cellabor-ad333.firebaseapp.com",
-//     projectId: 'cellabor-ad333',
-//     storageBucket: 'cellabor-ad333.appspot.com',
-//     messagingSenderId: '249009639394',
-//     appId: '1:249009639394:web:9e9c0ce128c13ec141f3bb',
-//     measurementId: 'G-38H3CDXCLJ',
-//   };
+console.log(firebaseConfig)
 
 // Firebase 초기화
 const app = initializeApp(firebaseConfig);
@@ -95,15 +87,27 @@ export default function Home() {
             </div>
         );
     };
-
+    // if (!userDoc.exists()) {
+    //     await setDoc(userDocRef, {
+    //         email: user.email,
+    //         displayName: user.displayName,
+    //         photoURL: user.photoURL,
+    //         createdAt: new Date()
+    //     });
+    //     console.log('새 사용자 문서 생성됨');
+    // } else {
+    //     console.log('기존 사용자 문서 존재');
+    // }
     const reserveEmail = async () => {
         try {
-            const docRef = await addDoc(collection(db, 'reserve'), {
+            const userDocRef = doc(db, 'reserve', email);
+            await setDoc(userDocRef, {
                 email: email,
                 timestamp: new Date()
             });
 
-            alert('이메일이 성공적으로 저장되었습니다: ' + docRef.id);
+            alert('이메일이 성공적으로 저장되었습니다: ' + email);
+            setEmail('')
         } catch (error) {
             console.error('Error adding email:', error);
             alert('이메일 저장 실패');
