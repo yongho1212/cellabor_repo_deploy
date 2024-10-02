@@ -57,12 +57,19 @@ export default function Home() {
     ];
 
     useEffect(() => {
-        // GA 초기화
-        ReactGA.initialize(process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID);
+        const trackingId = process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID;
 
-        // 초기 페이지뷰 전송
-        ReactGA.send({ hitType: 'pageview', page: window.location.pathname });
+        if (trackingId) {
+            // GA 초기화
+            ReactGA.initialize(trackingId);
+
+            // 초기 페이지뷰 전송
+            ReactGA.send({ hitType: 'pageview', page: window.location.pathname });
+        } else {
+            console.warn("Google Analytics tracking ID is missing.");
+        }
     }, []);
+
 
     const Carousel = () => {
         return (
