@@ -1,5 +1,5 @@
 import './globals.css'
-import type {Metadata} from 'next'
+import type { Metadata } from 'next'
 import { Suspense } from 'react'
 import Loading from './components/Loading'
 import NavBar from './components/NavBar';
@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({
-                                       children,
-                                   }: {
+    children,
+}: {
     children: React.ReactNode
 }) {
     return (
         <html lang="ko">
-        <body className={`bg-background text-text mobile-layout-container`}>
-            <HeaderBar/>
-            <div className={'h-12'}/>
-            <Suspense fallback={<Loading />}>
-                {children}
-            </Suspense>
-            <div className={'h-12'}/>
-            <NavBar/>
-        </body>
+            <body className={`bg-background text-text mobile-layout-container`}>
+                <HeaderBar />
+                <div className={'h-12'} />
+                <Suspense fallback={<Loading />}>
+                    {children}
+                </Suspense>
+                <div className={'h-12'} />
+                <NavBar />
+            </body>
         </html>
     )
 }

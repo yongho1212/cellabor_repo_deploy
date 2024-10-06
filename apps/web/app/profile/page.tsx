@@ -18,9 +18,6 @@ const MyProfilePage = () => {
     const { user, loading } = useAuth();
     const [profileData, setProfileData] = useState<UserFBAuthInfoInterface | null>(null);
 
-    // if (!loading && !user) router.push('/auth');
-
-
     const handleLogout = async () => {
         try {
             await signOut(auth);

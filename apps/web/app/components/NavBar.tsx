@@ -17,6 +17,8 @@ const NAV_ITEMS = [
 export default function NavBar() {
     const pathname = usePathname()
 
+    if (pathname === '/write') return null;
+
     return (
         <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-[9999]">
             <div className="max-w-[800px] px-[20px] mx-auto ">
