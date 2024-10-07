@@ -68,7 +68,7 @@ const MyProfilePage = () => {
                 <div className="flex flex-col items-center mb-6">
                     <div className="relative w-24 h-24 mb-2">
                         <Image
-                            src={profileData.photoURL || "/place_profile.svg"}
+                            src={profileData.profileImage || "/place_profile.svg"}
                             alt="Profile"
                             layout="fill"
                             className="rounded-full"

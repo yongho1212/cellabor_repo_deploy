@@ -47,7 +47,7 @@ const Auth = () => {
             await setDoc(userDocRef, {
                 email: user.email,
                 displayName: user.displayName,
-                photoURL: user.photoURL,
+                profileImage: user.photoURL,
                 createdAt: new Date()
             });
             console.log('새 사용자 문서 생성됨');
@@ -61,10 +61,8 @@ const Auth = () => {
             uid: result.user.uid,
             email: result.user.email,
             displayName: result.user.displayName,
-            photoURL: result.user.photoURL
+            profileImage: result.user.photoURL
         };
-
-        console.log("FB FACEBOOOK LOGIN DATA", result, user)
 
         await checkAndCreateUser(user);
         router.push('/');
@@ -91,65 +89,26 @@ const Auth = () => {
     const handleSocialLogin = async (provider: GoogleAuthProvider | FacebookAuthProvider) => {
         try {
             let result: UserCredential;
-
-            if (provider instanceof FacebookAuthProvider) {
-                result = await signInWithPopup(auth, provider);
-
-                // Facebook 특정 로직
-                const credential = FacebookAuthProvider.credentialFromResult(result);
-                const accessToken = credential?.accessToken;
-
-                console.log("Facebook User:", result.user);
-                console.log("Facebook Credential:", credential);
-                console.log("Facebook Access Token:", accessToken);
-            } else if (provider instanceof GoogleAuthProvider) {
-                result = await signInWithPopup(auth, provider);
-
-                // Google 특정 로직
-                const credential = GoogleAuthProvider.credentialFromResult(result);
-                const token = credential?.accessToken;
-
-                console.log("Google User:", result.user);
-                console.log("Google Credential:", credential);
-                console.log("Google Access Token:", token);
-            } else {
-                throw new Error("Unsupported provider");
+            result = await signInWithPopup(auth, provider);
+            if (result){
+                await processAuthResult(result);
             }
+            // if (provider instanceof FacebookAuthProvider) {
+            //     // const credential = FacebookAuthProvider.credentialFromResult(result);
+            //     // const accessToken = credential?.accessToken;
+            // } else if (provider instanceof GoogleAuthProvider) {
+            //     result = await signInWithPopup(auth, provider);
+            //     // const credential = GoogleAuthProvider.credentialFromResult(result);
+            //     // const token = credential?.accessToken;
 
-            // 공통 로직
-            await processAuthResult(result);
         } catch (error: any) {
             console.error('소셜 로그인 실패:', error);
             setError(`소셜 로그인에 실패했습니다: ${error.message}`);
         }
     };
 
-    const handleFacebookLogin = async (response:any) => {
-        console.log('Facebook Login Response:', response);
-
-        if (response.status === 'connected' && response.authResponse) {
-            try {
-                const { accessToken } = response.authResponse;
-                const credential = FacebookAuthProvider.credential(accessToken);
-
-                // Firebase로 로그인
-                const result = await signInWithCredential(auth, credential);
-                console.log('Firebase login result:', result);
-
-                // 사용자 정보 처리
-                await processAuthResult(result);
-            } catch (error: any) {
-                console.error('Firebase Facebook 로그인 실패:', error);
-                setError(`Facebook 로그인에 실패했습니다: ${error.message}`);
-            }
-        } else {
-            console.error('Facebook 로그인 실패:', response);
-            setError('Facebook 로그인에 실패했습니다.');
-        }
-    };
-
     const handleGoogleLogin = () => handleSocialLogin(new GoogleAuthProvider());
-    const handleFacebookLogin1 = () => handleSocialLogin(new FacebookAuthProvider());
+    const handleFacebookLogin = () => handleSocialLogin(new FacebookAuthProvider());
 
     const toggleAuthMode = () => {
         setIsLogin(!isLogin);
@@ -231,28 +190,10 @@ const Auth = () => {
                                 className="w-10 h-10 rounded-full justify-center flex items-center">
                             <Image src={Google} alt="Google"/>
                         </button>
-                        <button onClick={handleFacebookLogin1}
+                        <button onClick={handleFacebookLogin}
                                 className="w-10 h-10 rounded-full justify-center flex items-center">
                             <Image src={Facebook} alt="Facebook"/>
                         </button>
-                        <FacebookLogin
-                            appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
-                            onSuccess={(response) => {
-                                console.log('Login Success!', response);
-                            }}
-                            onFail={(error) => {
-                                console.log('Login Failed!', error);
-                            }}
-                            onProfileSuccess={(response) => {
-                                console.log('Get Profile Success!', response);
-                            }}
-                            render={({onClick}) => (
-                                <button onClick={onClick}
-                                        className="w-10 h-10 bg-blue-500 rounded-full justify-center flex items-center">
-                                    <Image src={Facebook} alt="Facebook"/>
-                                </button>
-                            )}
-                        />
                     </div>
                 </div>
             </div>

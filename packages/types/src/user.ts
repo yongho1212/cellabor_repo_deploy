@@ -1,8 +1,8 @@
 export interface UserFBAuthInfoInterface {
+    uid: string;
     displayName: string;
     email: string;
-    uid: string;
-    photoURL?: string;
+    profileImage?: string;
 }
 
 export interface UserInfoInterface extends UserFBAuthInfoInterface {
@@ -12,10 +12,10 @@ export interface UserInfoInterface extends UserFBAuthInfoInterface {
     phonenumber?: string;
     phoneverify?: boolean;
     hashtags?: string[];
-    createdAt?: Date;
     subimages?: string[];
     bookmarkPosts?: string[];
     modifiedAt?: Date;
     viewCount?: number;
     snsList?: { platform: string; username: string; url: string }[];
+    createdAt?: Date;
 }
