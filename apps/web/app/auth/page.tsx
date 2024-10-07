@@ -22,7 +22,7 @@ import { UserFBAuthInfoInterface } from '@repo/types';
 import Google from '../../public/logos/google_logo.png';
 import Facebook from '../../public/logos/facebook_logo.png';
 import withAuth from 'app/components/withAuth';
-import FacebookLogin from '@greatsumini/react-facebook-login';
+import FacebookLogin, { LoginResponse } from '@greatsumini/react-facebook-login';
 
 const Auth = () => {
     const router = useRouter();
