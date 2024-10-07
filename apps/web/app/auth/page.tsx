@@ -38,6 +38,29 @@ const Auth = () => {
         setError(msg || '');
     }, [email, password, isLogin, confirmPassword]);
 
+    // useEffect(() => {
+    //     // Facebook SDK 초기화
+    //     if (typeof window !== 'undefined') {
+    //         window.fbAsyncInit = function() {
+    //             FB.init({
+    //                 appId: process.env.NEXT_PUBLIC_FB_AUTH_FACEBOOK_APP_ID,
+    //                 cookie: true,
+    //                 xfbml: true,
+    //                 version: 'v17.0'
+    //             });
+    //         };
+    //
+    //         // Facebook SDK 로드
+    //         (function(d, s, id) {
+    //             var js, fjs = d.getElementsByTagName(s)[0];
+    //             if (d.getElementById(id)) return;
+    //             js = d.createElement(s); js.id = id;
+    //             js.src = "https://connect.facebook.net/en_US/sdk.js";
+    //             fjs.parentNode.insertBefore(js, fjs);
+    //         }(document, 'script', 'facebook-jssdk'));
+    //     }
+    // }, []);
+
     const checkAndCreateUser = async (user: any) => {
         const userDocRef = doc(db, 'users', user.uid);
         const userDoc = await getDoc(userDocRef);
@@ -62,6 +85,8 @@ const Auth = () => {
             displayName: result.user.displayName,
             photoURL: result.user.photoURL
         };
+
+        console.log("FB FACEBOOOK LOGIN DATA", result, user)
 
         await checkAndCreateUser(user);
         router.push('/');
@@ -97,7 +122,7 @@ const Auth = () => {
     const handleFacebookLogin = async (response: any) => {
         try {
             const credential = FacebookAuthProvider.credential(response.accessToken);
-            const result = await signInWithCredential(auth, credential);
+            const result = await signInWithPopup(auth, credential);
             await processAuthResult(result);
         } catch (error: any) {
             console.error('Facebook 로그인 실패:', error);
@@ -106,7 +131,7 @@ const Auth = () => {
     };
 
     const handleGoogleLogin = () => handleSocialLogin(new GoogleAuthProvider());
-    // const handleFacebookLogin = () => handleSocialLogin(new FacebookAuthProvider());
+    const handleFacebookLogin1 = () => handleSocialLogin(new FacebookAuthProvider());
 
     const toggleAuthMode = () => {
         setIsLogin(!isLogin);
@@ -184,8 +209,13 @@ const Auth = () => {
                 <div className="text-center">
                     <p className="mb-4">SNS로 로그인하기</p>
                     <div className="flex justify-center space-x-4 py-4">
-                        <button onClick={handleGoogleLogin} className="w-10 h-10 rounded-full justify-center flex items-center">
-                            <Image src={Google} alt="Google" />
+                        <button onClick={handleGoogleLogin}
+                                className="w-10 h-10 rounded-full justify-center flex items-center">
+                            <Image src={Google} alt="Google"/>
+                        </button>
+                        <button onClick={handleFacebookLogin1}
+                                className="w-10 h-10 rounded-full justify-center flex items-center">
+                            <Image src={Facebook} alt="Facebook"/>
                         </button>
                         <FacebookLogin
                             appId={process.env.NEXT_PUBLIC_FB_AUTH_FACEBOOK_APP_ID!}
@@ -196,8 +226,9 @@ const Auth = () => {
                                 setError('Facebook 로그인에 실패했습니다.');
                             }}
                             render={({onClick}) => (
-                                <button onClick={onClick} className="w-10 h-10 bg-blue-500 rounded-full justify-center flex items-center">
-                                    <Image src={Facebook} alt="Facebook" />
+                                <button onClick={onClick}
+                                        className="w-10 h-10 bg-blue-500 rounded-full justify-center flex items-center">
+                                    <Image src={Facebook} alt="Facebook"/>
                                 </button>
                             )}
                         />
