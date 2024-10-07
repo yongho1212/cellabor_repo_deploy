@@ -38,28 +38,6 @@ const Auth = () => {
         setError(msg || '');
     }, [email, password, isLogin, confirmPassword]);
 
-    // useEffect(() => {
-    //     // Facebook SDK 초기화
-    //     if (typeof window !== 'undefined') {
-    //         window.fbAsyncInit = function() {
-    //             FB.init({
-    //                 appId: process.env.NEXT_PUBLIC_FB_AUTH_FACEBOOK_APP_ID,
-    //                 cookie: true,
-    //                 xfbml: true,
-    //                 version: 'v17.0'
-    //             });
-    //         };
-    //
-    //         // Facebook SDK 로드
-    //         (function(d, s, id) {
-    //             var js, fjs = d.getElementsByTagName(s)[0];
-    //             if (d.getElementById(id)) return;
-    //             js = d.createElement(s); js.id = id;
-    //             js.src = "https://connect.facebook.net/en_US/sdk.js";
-    //             fjs.parentNode.insertBefore(js, fjs);
-    //         }(document, 'script', 'facebook-jssdk'));
-    //     }
-    // }, []);
 
     const checkAndCreateUser = async (user: any) => {
         const userDocRef = doc(db, 'users', user.uid);
@@ -121,8 +99,9 @@ const Auth = () => {
 
     const handleFacebookLogin = async (response: any) => {
         try {
-            const credential = FacebookAuthProvider.credential(response.accessToken);
-            const result = await signInWithPopup(auth, credential);
+            // const credential = FacebookAuthProvider.credential(response.accessToken);
+            const provider = new FacebookAuthProvider();
+            const result = await signInWithPopup(auth, provider);
             await processAuthResult(result);
         } catch (error: any) {
             console.error('Facebook 로그인 실패:', error);
@@ -218,7 +197,7 @@ const Auth = () => {
                             <Image src={Facebook} alt="Facebook"/>
                         </button>
                         <FacebookLogin
-                            appId={process.env.NEXT_PUBLIC_FB_AUTH_FACEBOOK_APP_ID!}
+                            appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
                             onSuccess={handleFacebookLogin}
                             // fields='name, email, picture'
                             onFail={(error) => {
