@@ -90,25 +90,37 @@ const Auth = () => {
 
     const handleSocialLogin = async (provider: GoogleAuthProvider | FacebookAuthProvider) => {
         try {
-            if (provider === FacebookAuthProvider) {
-                signInWithPopup(auth, provider)
-                    .then((result) => {
-                        // The signed-in user info.
-                        const user = result.user;
+            let result: UserCredential;
 
-                        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-                        const credential = FacebookAuthProvider.credentialFromResult(result);
-                        const accessToken = credential.accessToken;
+            if (provider instanceof FacebookAuthProvider) {
+                result = await signInWithPopup(auth, provider);
 
-                        console.log(user, credential, "FBFBFBFBFFB")
-                    })
+                // Facebook 특정 로직
+                const credential = FacebookAuthProvider.credentialFromResult(result);
+                const accessToken = credential?.accessToken;
+
+                console.log("Facebook User:", result.user);
+                console.log("Facebook Credential:", credential);
+                console.log("Facebook Access Token:", accessToken);
+            } else if (provider instanceof GoogleAuthProvider) {
+                result = await signInWithPopup(auth, provider);
+
+                // Google 특정 로직
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential?.accessToken;
+
+                console.log("Google User:", result.user);
+                console.log("Google Credential:", credential);
+                console.log("Google Access Token:", token);
+            } else {
+                throw new Error("Unsupported provider");
             }
-            const result = await signInWithPopup(auth, provider);
-            console.log(result);
+
+            // 공통 로직
             await processAuthResult(result);
         } catch (error: any) {
-            console.log(error)
-            setError('소셜 로그인에 실패했습니다.');
+            console.error('소셜 로그인 실패:', error);
+            setError(`소셜 로그인에 실패했습니다: ${error.message}`);
         }
     };
 
