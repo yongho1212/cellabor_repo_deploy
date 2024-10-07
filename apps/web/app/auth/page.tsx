@@ -22,7 +22,7 @@ import { UserFBAuthInfoInterface } from '@repo/types';
 import Google from '../../public/logos/google_logo.png';
 import Facebook from '../../public/logos/facebook_logo.png';
 import withAuth from 'app/components/withAuth';
-import FacebookLogin, { LoginResponse } from '@greatsumini/react-facebook-login';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const Auth = () => {
     const router = useRouter();
@@ -124,7 +124,7 @@ const Auth = () => {
         }
     };
 
-    const handleFacebookLogin = async (response: LoginResponse) => {
+    const handleFacebookLogin = async (response:any) => {
         console.log('Facebook Login Response:', response);
 
         if (response.status === 'connected' && response.authResponse) {
@@ -237,11 +237,14 @@ const Auth = () => {
                         </button>
                         <FacebookLogin
                             appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
-                            onSuccess={(res) => handleFacebookLogin(res)}
-                            // fields='name, email, picture'
+                            onSuccess={(response) => {
+                                console.log('Login Success!', response);
+                            }}
                             onFail={(error) => {
-                                console.log('Facebook Login Failed!', error);
-                                setError('Facebook 로그인에 실패했습니다.');
+                                console.log('Login Failed!', error);
+                            }}
+                            onProfileSuccess={(response) => {
+                                console.log('Get Profile Success!', response);
                             }}
                             render={({onClick}) => (
                                 <button onClick={onClick}
