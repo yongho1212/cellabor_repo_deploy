@@ -7,7 +7,8 @@ import {
     signInWithPopup,
     GoogleAuthProvider,
     FacebookAuthProvider,
-    UserCredential
+    UserCredential,
+    signInWithCredential
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../firebaseConfig';
@@ -21,6 +22,7 @@ import { UserFBAuthInfoInterface } from '@repo/types';
 import Google from '../../public/logos/google_logo.png';
 import Facebook from '../../public/logos/facebook_logo.png';
 import withAuth from 'app/components/withAuth';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const Auth = () => {
     const router = useRouter();
@@ -92,8 +94,19 @@ const Auth = () => {
         }
     };
 
+    const handleFacebookLogin = async (response: any) => {
+        try {
+            const credential = FacebookAuthProvider.credential(response.accessToken);
+            const result = await signInWithCredential(auth, credential);
+            await processAuthResult(result);
+        } catch (error: any) {
+            console.error('Facebook 로그인 실패:', error);
+            setError('Facebook 로그인에 실패했습니다.');
+        }
+    };
+
     const handleGoogleLogin = () => handleSocialLogin(new GoogleAuthProvider());
-    const handleFacebookLogin = () => handleSocialLogin(new FacebookAuthProvider());
+    // const handleFacebookLogin = () => handleSocialLogin(new FacebookAuthProvider());
 
     const toggleAuthMode = () => {
         setIsLogin(!isLogin);
@@ -174,9 +187,20 @@ const Auth = () => {
                         <button onClick={handleGoogleLogin} className="w-10 h-10 rounded-full justify-center flex items-center">
                             <Image src={Google} alt="Google" />
                         </button>
-                        <button onClick={handleFacebookLogin} className="w-10 h-10 bg-blue-500 rounded-full justify-center flex items-center">
-                            <Image src={Facebook} alt="Facebook" />
-                        </button>
+                        <FacebookLogin
+                            appId={process.env.NEXT_PUBLIC_FB_AUTH_FACEBOOK_APP_ID!}
+                            onSuccess={handleFacebookLogin}
+                            // fields='name, email, picture'
+                            onFail={(error) => {
+                                console.log('Facebook Login Failed!', error);
+                                setError('Facebook 로그인에 실패했습니다.');
+                            }}
+                            render={({onClick}) => (
+                                <button onClick={onClick} className="w-10 h-10 bg-blue-500 rounded-full justify-center flex items-center">
+                                    <Image src={Facebook} alt="Facebook" />
+                                </button>
+                            )}
+                        />
                     </div>
                 </div>
             </div>

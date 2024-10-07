@@ -32,6 +32,7 @@
   "dependencies": {
     "@egjs/flicking-plugins": "^4.7.1",
     "@egjs/react-flicking": "^4.11.4",
+    "@greatsumini/react-facebook-login": "^3.3.3",
     "@react-native-picker/picker": "^2.8.1",
     "@repo/ui": "*",
     "axios": "^1.7.7",
