@@ -90,7 +90,7 @@ const Auth = () => {
 
     const handleSocialLogin = async (provider: GoogleAuthProvider | FacebookAuthProvider) => {
         try {
-            if (provider === 'facebook') {
+            if (provider === FacebookAuthProvider) {
                 signInWithPopup(auth, provider)
                     .then((result) => {
                         // The signed-in user info.
