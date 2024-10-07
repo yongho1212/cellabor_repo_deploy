@@ -90,21 +90,48 @@ const Auth = () => {
 
     const handleSocialLogin = async (provider: GoogleAuthProvider | FacebookAuthProvider) => {
         try {
+            if (provider === 'facebook') {
+                signInWithPopup(auth, provider)
+                    .then((result) => {
+                        // The signed-in user info.
+                        const user = result.user;
+
+                        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+                        const credential = FacebookAuthProvider.credentialFromResult(result);
+                        const accessToken = credential.accessToken;
+
+                        console.log(user, credential, "FBFBFBFBFFB")
+                    })
+            }
             const result = await signInWithPopup(auth, provider);
+            console.log(result);
             await processAuthResult(result);
         } catch (error: any) {
+            console.log(error)
             setError('소셜 로그인에 실패했습니다.');
         }
     };
 
-    const handleFacebookLogin = async (response: any) => {
-        try {
-            // const credential = FacebookAuthProvider.credential(response.accessToken);
-            const provider = new FacebookAuthProvider();
-            const result = await signInWithPopup(auth, provider);
-            await processAuthResult(result);
-        } catch (error: any) {
-            console.error('Facebook 로그인 실패:', error);
+    const handleFacebookLogin = async (response: LoginResponse) => {
+        console.log('Facebook Login Response:', response);
+
+        if (response.status === 'connected' && response.authResponse) {
+            try {
+                const { accessToken } = response.authResponse;
+                const credential = FacebookAuthProvider.credential(accessToken);
+
+                // Firebase로 로그인
+                const result = await signInWithCredential(auth, credential);
+                console.log('Firebase login result:', result);
+
+                // 사용자 정보 처리
+                await processAuthResult(result);
+            } catch (error: any) {
+                console.error('Firebase Facebook 로그인 실패:', error);
+                setError(`Facebook 로그인에 실패했습니다: ${error.message}`);
+            }
+        } else {
+            console.error('Facebook 로그인 실패:', response);
             setError('Facebook 로그인에 실패했습니다.');
         }
     };
@@ -198,7 +225,7 @@ const Auth = () => {
                         </button>
                         <FacebookLogin
                             appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
-                            onSuccess={handleFacebookLogin}
+                            onSuccess={(res) => handleFacebookLogin(res)}
                             // fields='name, email, picture'
                             onFail={(error) => {
                                 console.log('Facebook Login Failed!', error);
