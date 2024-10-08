@@ -49,16 +49,9 @@ const MyProfilePage = () => {
     }, [user]);
 
 
-    const instaInitiate = async () => {
-        const REDIRECT_URI = process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_REDIRECT_URL;
-        const APP_ID = process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID
-        const authUrl =
-            'https://www.facebook.com/v21.0/dialog/oauth?' +
-            `client_id=${APP_ID}` +
-            `&redirect_uri=${encodeURIComponent(REDIRECT_URI!)}` +
-            '&state={st=state123abc,ds=123456789}' +
-            '&scope=pages_show_list,instagram_basic';
-        window.location.href = authUrl;
+    const instagramAuthInitiate = async () => {
+        const url = await authApi.instagramGetUrl();
+        window.location.href = url;
     }
 
     const menuItems: MenuItemType[] = [
@@ -102,24 +95,9 @@ const MyProfilePage = () => {
                         height={50}
                     />
                     <Typography variant={'caption'} color={'black'}>인스타그램을 연동하고 나에게 맞는 촬영메이트를 찾아보세요.</Typography>
-                    <button className="w-full bg-primary  rounded h-[70px]" onClick={instaInitiate}>
+                    <button className="w-full bg-primary  rounded h-[70px]" onClick={instagramAuthInitiate}>
                         <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>
                     </button>
-                    {/*<FacebookLogin*/}
-                    {/*    appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}*/}
-                    {/*    onSuccess={handleFacebookLogin}*/}
-                    {/*    onFail={(error) => {*/}
-                    {/*        console.log('Login Failed!', error);*/}
-                    {/*    }}*/}
-                    {/*    onProfileSuccess={(response) => {*/}
-                    {/*        console.log('Get Profile Success!', response);*/}
-                    {/*    }}*/}
-                    {/*    render={({onClick}) => (*/}
-                    {/*        <button className="w-full bg-primary  rounded h-[70px]" onClick={onClick}>*/}
-                    {/*            <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>*/}
-                    {/*        </button>*/}
-                    {/*    )}*/}
-                    {/*/>*/}
                 </div>
 
                 <div className="space-y-2">

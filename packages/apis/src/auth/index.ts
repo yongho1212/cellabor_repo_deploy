@@ -13,16 +13,12 @@ export const authApi = {
             throw error;
         }
     },
-    instagram: async () => {
-        const REDIRECT_URI = 'https://www.cellabor.com/instagram/callback';
-
-        const authUrl =
-            'https://www.facebook.com/v21.0/dialog/oauth?' +
-            `client_id=${process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID}` +
-            `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
-            '&state={st=state123abc,ds=123456789}' +
-            '&scope=pages_show_list,instagram_basic';
-        window.location.href = authUrl;
-
+    instagramGetUrl: async () => {
+        try{
+            const response = await axiosInstance.get('/instagram/auth');
+            return response.data;
+        }catch (err){
+            console.error('Error fetching post details:', err);
+        }
     }
 };
