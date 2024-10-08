@@ -1,6 +1,5 @@
 import axiosInstance from '../axiosInstance';
 import {UserFBAuthInfoInterface} from '@repo/types';
-import * as process from 'node:process';
 
 export const authApi = {
     register: async (userData: UserFBAuthInfoInterface) => {

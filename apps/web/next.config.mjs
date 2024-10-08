@@ -47,6 +47,11 @@ const nextConfig = {
             ".web.tsx",
             ...config.resolve.extensions,
         ];
+        config.module.rules.forEach((rule) => {
+            if (rule.resolve) {
+                rule.resolve.fullySpecified = false; // node: 스킴 관련 문제 해결
+            }
+        });
         return config;
     }
 }

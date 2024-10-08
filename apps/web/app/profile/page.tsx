@@ -12,8 +12,7 @@ import Typography from '@repo/ui/components/Typography/Typography';
 import {UserFBAuthInfoInterface} from '@repo/types'
 import Menu, { MenuItemType } from '../components/Menu';
 import Loading from '../components/Loading';
-import {data} from 'autoprefixer';
-import FacebookLogin from '@greatsumini/react-facebook-login';
+// import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const MyProfilePage = () => {
     const router = useRouter();
@@ -122,21 +121,21 @@ const MyProfilePage = () => {
                     <button className="w-full bg-primary  rounded h-[70px]" onClick={instaInitiate}>
                         <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>
                     </button>
-                    <FacebookLogin
-                        appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
-                        onSuccess={handleFacebookLogin}
-                        onFail={(error) => {
-                            console.log('Login Failed!', error);
-                        }}
-                        onProfileSuccess={(response) => {
-                            console.log('Get Profile Success!', response);
-                        }}
-                        render={({onClick}) => (
-                            <button className="w-full bg-primary  rounded h-[70px]" onClick={onClick}>
-                                <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>
-                            </button>
-                        )}
-                    />
+                    {/*<FacebookLogin*/}
+                    {/*    appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}*/}
+                    {/*    onSuccess={handleFacebookLogin}*/}
+                    {/*    onFail={(error) => {*/}
+                    {/*        console.log('Login Failed!', error);*/}
+                    {/*    }}*/}
+                    {/*    onProfileSuccess={(response) => {*/}
+                    {/*        console.log('Get Profile Success!', response);*/}
+                    {/*    }}*/}
+                    {/*    render={({onClick}) => (*/}
+                    {/*        <button className="w-full bg-primary  rounded h-[70px]" onClick={onClick}>*/}
+                    {/*            <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>*/}
+                    {/*        </button>*/}
+                    {/*    )}*/}
+                    {/*/>*/}
                 </div>
 
                 <div className="space-y-2">
