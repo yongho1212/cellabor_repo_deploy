@@ -12,8 +12,6 @@ import Typography from '@repo/ui/components/Typography/Typography';
 import {UserFBAuthInfoInterface} from '@repo/types'
 import Menu, { MenuItemType } from '../components/Menu';
 import Loading from '../components/Loading';
-import * as process from 'node:process';
-// import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const MyProfilePage = () => {
     const router = useRouter();
@@ -62,20 +60,6 @@ const MyProfilePage = () => {
             '&scope=pages_show_list,instagram_basic';
         window.location.href = authUrl;
     }
-
-    // const handleFacebookLogin = async (response:any) => {
-    //     console.log('Facebook Login Response:', response);
-    //     if (response.status === 'connected' && response.authResponse) {
-    //         try {
-    //             const { accessToken } = response.authResponse;
-    //             console.log('Firebase login result:', accessToken);
-    //         } catch (error: any) {
-    //             console.error('Firebase Facebook 로그인 실패:', error);
-    //         }
-    //     } else {
-    //         console.error('Facebook 로그인 실패:', response);
-    //     }
-    // };
 
     const menuItems: MenuItemType[] = [
         { label: '스타일 관리', action: '/style-management' },

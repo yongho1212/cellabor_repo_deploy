@@ -6,4 +6,12 @@ module.exports = {
   parserOptions: {
     project: true,
   },
+  rules: {
+    'no-restricted-imports': [
+      'error',
+      {
+        patterns: ['node:process'],
+      },
+    ],
+  },
 };
