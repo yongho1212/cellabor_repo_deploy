@@ -40,7 +40,6 @@ const InstagramCallback = () => {
                 try {
                     setStatus('인증 코드 교환 중...');
                     const response = await axiosInstance.post('/instagram/exchangeCode', { code });
-                    console.log('Instagram data:', response.data);
                     setStatus('Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.');
                     setPages(response.data.pages);
                     setAccessToken(response.data.accessToken);

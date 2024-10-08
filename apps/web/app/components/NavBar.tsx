@@ -2,10 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import '../globals.css'
-// import sharedConfig from "@repo/tailwind-config";
-//
-// console.log(sharedConfig)
+
 
 const NAV_ITEMS = [
     { label: '홈', path: '/', icon: '🏠' },

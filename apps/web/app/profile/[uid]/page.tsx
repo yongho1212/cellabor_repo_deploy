@@ -4,7 +4,6 @@ import { usePathname } from 'next/navigation'
 
 export default function UserProfilePage() {
     const pathname = usePathname()
-    console.log(pathname)
 
     return (
         <div>

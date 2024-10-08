@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, Text, Alert} from 'react-native';
-import {firebase} from './firebase';
+// import {firebase} from './firebase';
 import {useSetRecoilState} from 'recoil';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {authState} from './authState';
@@ -82,7 +82,9 @@ const LoginScreen: React.FC = () => {
       {errorMessage && (
         <Text style={{color: 'red', marginBottom: 12}}>{errorMessage}</Text>
       )}
-        <Typography variant={'text1'}>내 스타일과 비슷한 메이트를 만나볼까요?</Typography>
+      <Typography variant={'text1'}>
+        내 스타일과 비슷한 메이트를 만나볼까요?
+      </Typography>
       <Button title="로그인" onPress={handleLogin} />
       <Button title="googlde" onPress={googleLogin} />
     </View>

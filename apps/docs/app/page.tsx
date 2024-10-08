@@ -34,7 +34,6 @@ const firebaseConfig = {
     appId: process.env.NEXT_PUBLIC_FB_APP_ID,
     measurementId: process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID,
 };
-console.log(firebaseConfig);
 
 const gaTrackingId = process.env.NEXT_PUBLIC_FB_MEASUREMEND_ID;
 
