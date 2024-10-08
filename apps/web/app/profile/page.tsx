@@ -55,7 +55,7 @@ const MyProfilePage = () => {
         const authUrl =
             'https://www.facebook.com/v21.0/dialog/oauth?' +
             `client_id=${APP_ID}` +
-            `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+            `&redirect_uri=${encodeURIComponent(REDIRECT_URI!)}` +
             '&state={st=state123abc,ds=123456789}' +
             '&scope=pages_show_list,instagram_basic';
         window.location.href = authUrl;
