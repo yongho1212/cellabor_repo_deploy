@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import axiosInstance from '@repo/apis/src/axiosInstance';
 
+import withAuth from '../../components/withAuth';
+import {useAuth} from '../../providers/AuthProvider';
+import Loading from '../../components/Loading';
+
 interface PageProps {
     id: string;
     name: string;
@@ -14,9 +18,9 @@ const InstagramCallback = () => {
     const router = useRouter();
     const [status, setStatus] = useState('처리 중...');
     const [pages, setPages] = useState<PageProps[]>([]);
-    const [accessToken, setAccessToken] = useState('');
+    // const [accessToken, setAccessToken] = useState('');
     const [selectedPageId, setSelectedPageId] = useState('');
-
+    const {user, loading} = useAuth();
     // const pages = [
     //     {
     //         id:'1',
@@ -36,10 +40,10 @@ const InstagramCallback = () => {
                 try {
                     setStatus('인증 코드 교환 중...');
                     const response = await axiosInstance.post('/instagram/exchangeCode', { code });
-                    console.log('Instagram data:', response.data);
+                    // console.log('Instagram data:', response.data);
                     setStatus('Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.');
                     setPages(response.data.pages);
-                    setAccessToken(response.data.accessToken);
+                    // setAccessToken(response.data.accessToken);
                 } catch (error) {
                     console.error('Error exchanging code for token:', error);
                     setStatus('인증 실패. 다시 시도해주세요.');
@@ -47,6 +51,7 @@ const InstagramCallback = () => {
             } else {
                 console.error('No code found in URL');
                 setStatus('인증 코드를 찾을 수 없습니다.');
+                router.push('/');
             }
         };
 
@@ -62,17 +67,21 @@ const InstagramCallback = () => {
         try {
             setStatus('Instagram 계정 정보를 가져오는 중...');
             const response = await axiosInstance.post('/instagram/getInstagramData', {
-                accessToken,
+                uid: user?.uid,
                 pageId: selectedPageId,
             });
-            console.log('Instagram Data:', response.data);
             setStatus('Instagram 데이터 가져오기 성공!');
-            //!!TODO
+            router.push('/');
         } catch (error) {
             console.error('Error fetching Instagram data:', error);
             setStatus('Instagram 데이터 가져오기 실패. 다시 시도해주세요.');
+            router.push('/');
         }
     };
+
+    if (loading) {
+        return <Loading />;
+    }
 
     return (
         <div className='flex flex-col items-center justify-center'>
@@ -80,6 +89,7 @@ const InstagramCallback = () => {
             {pages.length > 0 && (
                 <div className="w-full ">
                     <h3 className="text-lg font-semibold mb-4">Facebook 페이지 선택:</h3>
+                    {/*TODO!! 약관동의 페이지 추가*/}
                     <div className="space-y-2 mb-10">
                         {pages.map((page) => (
                             <label key={page.id} className="flex items-center space-x-2 cursor-pointer">
@@ -111,5 +121,5 @@ const InstagramCallback = () => {
     );
 };
 
-export default InstagramCallback;
+export default withAuth(InstagramCallback);
 
