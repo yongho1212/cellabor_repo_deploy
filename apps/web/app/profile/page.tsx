@@ -12,6 +12,7 @@ import Typography from '@repo/ui/components/Typography/Typography';
 import {UserFBAuthInfoInterface} from '@repo/types'
 import Menu, { MenuItemType } from '../components/Menu';
 import Loading from '../components/Loading';
+import * as process from 'node:process';
 // import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const MyProfilePage = () => {
@@ -51,7 +52,7 @@ const MyProfilePage = () => {
 
 
     const instaInitiate = async () => {
-        const REDIRECT_URI = 'http://localhost:3000/instagram/callback'; // 클라이언트의 콜백 URL
+        const REDIRECT_URI = process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_REDIRECT_URL;
         const APP_ID = process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID
         const authUrl =
             'https://www.facebook.com/v21.0/dialog/oauth?' +
@@ -61,8 +62,6 @@ const MyProfilePage = () => {
             '&scope=pages_show_list,instagram_basic';
         window.location.href = authUrl;
     }
-    const REDIRECT_URI = 'https://www.cellabor.com/instagram/callback';
-    console.log(encodeURIComponent(REDIRECT_URI))
 
     // const handleFacebookLogin = async (response:any) => {
     //     console.log('Facebook Login Response:', response);
