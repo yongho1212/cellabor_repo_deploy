@@ -51,18 +51,18 @@ const MyProfilePage = () => {
     }, [user]);
 
 
-    const instaInitiate = () => {
-        const CLIENT_ID = '796847139031633';
-        const REDIRECT_URI = 'http://localhost:3000/instagram/callback';
-
-        const authUrl =
-            'https://www.facebook.com/v21.0/dialog/oauth?' +
-            `client_id=${CLIENT_ID}` +
-            `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
-            '&state={st=state123abc,ds=123456789}' +
-            '&scope=pages_show_list,instagram_basic';
-
-        window.location.href = authUrl;
+    const handleFacebookLogin = async (response:any) => {
+        console.log('Facebook Login Response:', response);
+        if (response.status === 'connected' && response.authResponse) {
+            try {
+                const { accessToken } = response.authResponse;
+                console.log('Firebase login result:', accessToken);
+            } catch (error: any) {
+                console.error('Firebase Facebook 로그인 실패:', error);
+            }
+        } else {
+            console.error('Facebook 로그인 실패:', response);
+        }
     };
 
     const menuItems: MenuItemType[] = [
@@ -111,9 +111,7 @@ const MyProfilePage = () => {
                     {/*</button>*/}
                     <FacebookLogin
                         appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
-                        onSuccess={(response) => {
-                            console.log('Login Success!', response);
-                        }}
+                        onSuccess={handleFacebookLogin}
                         onFail={(error) => {
                             console.log('Login Failed!', error);
                         }}
