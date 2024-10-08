@@ -18,7 +18,7 @@ const InstagramCallback = () => {
     const router = useRouter();
     const [status, setStatus] = useState('처리 중...');
     const [pages, setPages] = useState<PageProps[]>([]);
-    // const [accessToken, setAccessToken] = useState('');
+    const [accessToken, setAccessToken] = useState('');
     const [selectedPageId, setSelectedPageId] = useState('');
     const {user, loading} = useAuth();
     // const pages = [
@@ -40,10 +40,10 @@ const InstagramCallback = () => {
                 try {
                     setStatus('인증 코드 교환 중...');
                     const response = await axiosInstance.post('/instagram/exchangeCode', { code });
-                    // console.log('Instagram data:', response.data);
+                    console.log('Instagram data:', response.data);
                     setStatus('Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.');
                     setPages(response.data.pages);
-                    // setAccessToken(response.data.accessToken);
+                    setAccessToken(response.data.accessToken);
                 } catch (error) {
                     console.error('Error exchanging code for token:', error);
                     setStatus('인증 실패. 다시 시도해주세요.');
@@ -63,19 +63,24 @@ const InstagramCallback = () => {
             alert('페이지를 선택하세요.');
             return;
         }
+        if (!user && loading){
+            alert('유저정보 받아오는중.. 잠시만 기다려주세요.');
+            return;
+        }
 
         try {
             setStatus('Instagram 계정 정보를 가져오는 중...');
             const response = await axiosInstance.post('/instagram/getInstagramData', {
-                uid: user?.uid,
+                accessToken: accessToken,
                 pageId: selectedPageId,
+                uid: user?.uid,
             });
             setStatus('Instagram 데이터 가져오기 성공!');
             router.push('/');
         } catch (error) {
             console.error('Error fetching Instagram data:', error);
             setStatus('Instagram 데이터 가져오기 실패. 다시 시도해주세요.');
-            router.push('/');
+            // router.push('/');
         }
     };
 
