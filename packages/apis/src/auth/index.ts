@@ -14,7 +14,7 @@ export const authApi = {
         }
     },
     instagram: async () => {
-        const REDIRECT_URI = 'http://localhost:3000/instagram/callback'; // 클라이언트의 콜백 URL
+        const REDIRECT_URI = 'https://www.cellabor.com/instagram/callback';
 
         const authUrl =
             'https://www.facebook.com/v21.0/dialog/oauth?' +
