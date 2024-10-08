@@ -13,5 +13,9 @@ export const authApi = {
             throw error;
         }
     },
-
+    instagram: async () => {
+        const response = await axiosInstance.get('/instagram/auth');
+        console.log(response.data,'auth api data')
+        window.location.href = response.data;
+    }
 };

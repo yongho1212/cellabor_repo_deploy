@@ -6,12 +6,14 @@ import { useAuth } from '../providers/AuthProvider';
 import withAuth from '../components/withAuth';
 import { auth } from '../../firebaseConfig';
 import { signOut } from 'firebase/auth';
-import { userApi } from '@repo/apis';
+import { userApi, authApi } from '@repo/apis';
 import Image from 'next/image';
 import Typography from '@repo/ui/components/Typography/Typography';
 import {UserFBAuthInfoInterface} from '@repo/types'
 import Menu, { MenuItemType } from '../components/Menu';
 import Loading from '../components/Loading';
+import {data} from 'autoprefixer';
+import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const MyProfilePage = () => {
     const router = useRouter();
@@ -47,6 +49,21 @@ const MyProfilePage = () => {
 
         fetchProfileData();
     }, [user]);
+
+
+    const instaInitiate = () => {
+        const CLIENT_ID = '796847139031633';
+        const REDIRECT_URI = 'http://localhost:3000/instagram/callback';
+
+        const authUrl =
+            'https://www.facebook.com/v21.0/dialog/oauth?' +
+            `client_id=${CLIENT_ID}` +
+            `&redirect_uri=${encodeURIComponent(REDIRECT_URI)}` +
+            '&state={st=state123abc,ds=123456789}' +
+            '&scope=pages_show_list,instagram_basic';
+
+        window.location.href = authUrl;
+    };
 
     const menuItems: MenuItemType[] = [
         { label: '스타일 관리', action: '/style-management' },
@@ -89,13 +106,30 @@ const MyProfilePage = () => {
                         height={50}
                     />
                     <Typography variant={'caption'} color={'black'}>인스타그램을 연동하고 나에게 맞는 촬영메이트를 찾아보세요.</Typography>
-                    <button className="w-full bg-primary  rounded h-[70px]">
-                        <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>
-                    </button>
+                    {/*<button className="w-full bg-primary  rounded h-[70px]" onClick={instaInitiate}>*/}
+                    {/*    <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>*/}
+                    {/*</button>*/}
+                    <FacebookLogin
+                        appId={process.env.NEXT_PUBLIC_BUSINESS_FACEBOOK_APP_ID!}
+                        onSuccess={(response) => {
+                            console.log('Login Success!', response);
+                        }}
+                        onFail={(error) => {
+                            console.log('Login Failed!', error);
+                        }}
+                        onProfileSuccess={(response) => {
+                            console.log('Get Profile Success!', response);
+                        }}
+                        render={({onClick}) => (
+                            <button className="w-full bg-primary  rounded h-[70px]" onClick={onClick}>
+                                <Typography variant={'body'} color={'white'}>인스타그램 계정 연동하기</Typography>
+                            </button>
+                        )}
+                    />
                 </div>
 
                 <div className="space-y-2">
-                    <Menu items={menuItems} />
+                    <Menu items={menuItems}/>
                 </div>
             </div>
         </div>

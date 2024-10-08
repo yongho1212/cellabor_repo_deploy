@@ -18,11 +18,10 @@ import Link from 'next/link';
 import Typography from '@repo/ui/components/Typography/Typography';
 import Spacer from '@repo/ui/components/Spacer/Spacer';
 import { validateAuthForm } from '@repo/utils';
-import { UserFBAuthInfoInterface } from '@repo/types';
+import { UserFBAuthInfoInterface, UserInfoInterface } from '@repo/types';
 import Google from '../../public/logos/google_logo.png';
 import Facebook from '../../public/logos/facebook_logo.png';
 import withAuth from 'app/components/withAuth';
-import FacebookLogin from '@greatsumini/react-facebook-login';
 
 const Auth = () => {
     const router = useRouter();
@@ -61,7 +60,7 @@ const Auth = () => {
             uid: result.user.uid,
             email: result.user.email,
             displayName: result.user.displayName,
-            profileImage: result.user.photoURL
+            photoURL: result.user.photoURL
         };
 
         await checkAndCreateUser(user);
