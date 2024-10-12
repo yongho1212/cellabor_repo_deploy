@@ -20,7 +20,7 @@ import {useLanguage} from '../../providers/ClientLanguageProvider';
 import dynamic from 'next/dynamic';
 
 const MyProfilePage = () => {
-    const { t } = useLanguage();
+    const { lang, t } = useLanguage();
     const {user, loading: authLoading, handleLogout} = useAuth();
     const {profileData, isLoading: profileLoading, updateProfileData} = useProfileData(user?.uid);
     const [isModalOpen, setIsModalOpen] = useState(false);

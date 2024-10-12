@@ -15,8 +15,6 @@ const UserProfilePage = () => {
     const uid = pathname.split('/').pop(); // URL에서 UID 추출
     const { profileData, isLoading: profileLoading } = useProfileData(uid);
 
-    console.log(profileData?.instagram.feeds.data[0])
-
     if (profileLoading) {
         return <Loading />;
     }

@@ -21,16 +21,7 @@ const InstagramCallback = () => {
     const [accessToken, setAccessToken] = useState('');
     const [selectedPageId, setSelectedPageId] = useState('');
     const {user, loading} = useAuth();
-    // const pages = [
-    //     {
-    //         id:'1',
-    //         name:'1111'
-    //     },
-    //     {
-    //         id:'2',
-    //         name:'ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁ'
-    //     }
-    // ]
+
 
     useEffect(() => {
         const fetchData = async () => {
