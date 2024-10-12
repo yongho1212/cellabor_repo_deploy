@@ -25,6 +25,8 @@ export default async function Home({ params: { lang } }: PageProps) {
         label: label as string
     }));
 
+
+
     return (
         <div className="min-h-screen bg-background pb-16">
             <main className="w-full mx-auto px-4 ">
