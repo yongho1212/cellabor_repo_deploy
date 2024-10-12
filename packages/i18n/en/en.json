@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "Cellabor",
+    "desc": "Easily find shooting partners with the style you want"
+  },
+  "menu": {
+    "styleManagement": "Style Management",
+    "inquiry": "1:1 Inquiry",
+    "terms": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "logout": "Logout",
+    "unsubscribe": "Unsubscribe"
+  },
+  "homeCategories": {
+    "hotel": "Hotel/Lounge",
+    "exhibition": "Exhibition",
+    "pool": "Swimming Pool",
+    "cafe": "Cafe",
+    "park": "Park/Outdoor",
+    "studio": "Studio Share",
+    "restaurant": "Restaurant",
+    "event": "Event"
+  },
+  "nav": {
+    "home": "home",
+    "search": "search",
+    "write": "write",
+    "profile": "mypage",
+    "posts": "post"
+  },
+  "common": {
+    "back": "back",
+    "logoAlt": "logo"
+  },
+  "home": {
+    "title": "What kind of activity partner are you looking for?",
+    "desc": "Shall we meet partners with a style similar to mine?",
+    "sectionTitle1": "Events",
+    "sectionTitle2": "Latest/Popular Posts"
+  },
+  "search": {
+    "title": "Find shooting partners who match your style",
+    "placeholder": "Enter search terms",
+    "resCount": "Search Results"
+  },
+  "write": {
+    "title": "Write a Post",
+    "section1Title": "Title",
+    "section1Placeholder": "Please enter a title.",
+    "section1Announce": "You may be penalized for writing posts related to advertising, inappropriate meetings, or religious organizations.",
+    "section2Title": "Day of the Week",
+    "section2Placeholder": "Please set the day of the week for the shoot.",
+    "section3Title": "Location",
+    "section3Placeholder": "Please set the location for the shoot.",
+    "section4Title": "Concept (Max 3)",
+    "section4Placeholder": "Please set the concept for the shoot.",
+    "section5Title": "Position (Coming Soon)",
+    "section5Placeholder": "Coming soon.",
+    "section6Title": "Content",
+    "section6Placeholder": "Your shooting partner application rate increases when you write with a brief introduction :)",
+    "section7Title": "Reference Images",
+    "section7Placeholder": "Please attach images!",
+    "submit": "submit"
+  },
+  "mypage": {
+    "title": "My Page",
+    "settingButton": "Settings",
+    "igTitle": "Connect Instagram",
+    "igDesc": "Link your Instagram and find shooting partners that match you.",
+    "igButton": "Link Instagram Account"
+  }
+}

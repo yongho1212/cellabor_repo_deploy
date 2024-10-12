@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import {PostInterface} from '../../../../types/src/index';
+import { PostInterface } from '../../../../types/src/index';
 import { timeAgo } from '@repo/utils';
 
 interface CardProps {
@@ -9,7 +9,7 @@ interface CardProps {
     environment: 'desktop' | 'mobile' | 'react-native';
     backgroundColor?: string;
     onPress?: (postId: string) => void;
-    isList? : boolean
+    isList?: boolean
 }
 
 const PostCard: React.FC<CardProps> = ({ post, environment, backgroundColor = '#F3F4F6', isList }) => {
@@ -101,7 +101,7 @@ const PostCard: React.FC<CardProps> = ({ post, environment, backgroundColor = '#
                 <Image source={{ uri: post.thumbnail }} style={styles.image} />
             </View>
             <View style={styles.tagsContainer}>
-                {post.hashTags.slice(0, 2).map((tag) => (
+                {post.hashTags.slice(0, 3).map((tag) => (
                     <Text key={tag} style={styles.tag}>{tag}</Text>
                 ))}
             </View>

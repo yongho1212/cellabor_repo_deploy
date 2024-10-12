@@ -3,10 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { MdOutlineSearch } from "react-icons/md";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
-
-import {useResponsive} from '../hooks/useResponsive';
-// import SearchFormComponent from '@repo/ui/components/SearchForm/SearchForm';
+import { useResponsive } from '../hooks/useResponsive';
 
 
 export default function SearchForm() {
@@ -18,17 +15,17 @@ export default function SearchForm() {
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
         const queryParams = new URLSearchParams({ q: searchTerm });
-        activeFilters.forEach(filter => queryParams.append('filter', filter));
-        router.push(`/search?${queryParams.toString()}`);
+        // activeFilters.forEach(filter => queryParams.append('filter', filter));
+        router.push(`${window.location.pathname}?${queryParams.toString()}`);
     };
 
-    const toggleFilter = (filter: string) => {
-        setActiveFilters(prev =>
-            prev.includes(filter)
-                ? prev.filter(f => f !== filter)
-                : [...prev, filter]
-        );
-    };
+    // const toggleFilter = (filter: string) => {
+    //     setActiveFilters(prev =>
+    //         prev.includes(filter)
+    //             ? prev.filter(f => f !== filter)
+    //             : [...prev, filter]
+    //     );
+    // };
 
     return (
         <div>
@@ -45,22 +42,21 @@ export default function SearchForm() {
                     className="absolute right-2 top-1/2 transform -translate-y-1/2"
                     aria-label="Search"
                 >
-                    <MdOutlineSearch size={24}/>
+                    <MdOutlineSearch size={24} />
                 </button>
             </form>
-            <div className="flex flex-wrap gap-2 mb-4">
-                {['지역', '요일', '시간대', '실내/실외', '장소'].map((filter) => (
+            {/* <div className="flex flex-wrap gap-2 mb-4">
+                {['지역', '요일', '시간대', '장소', '컨셉'].map((filter) => (
                     <button
                         key={filter}
-                        className={`px-3 py-1 rounded-full text-sm border-b-2 flex flex-row gap-2 items-center text-sm ${
-                            activeFilters.includes(filter) ? 'bg-blue-500 text-white' : 'bg-white text-gray-400'
-                        }`}
+                        className={`px-3 py-1 rounded-full text-sm border-b-2 flex flex-row gap-2 items-center text-sm ${activeFilters.includes(filter) ? 'bg-blue-500 text-white' : 'bg-white text-gray-400'
+                            }`}
                         onClick={() => toggleFilter(filter)}
                     >
-                        {filter} {activeFilters.includes(filter) ? <IoIosArrowUp size={20}/> : <IoIosArrowDown size={20}/>}
+                        {filter} {activeFilters.includes(filter) ? <IoIosArrowUp size={20} /> : <IoIosArrowDown size={20} />}
                     </button>
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -7,9 +7,16 @@ const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
     reactStrictMode: true,
-    images:{
-        domains: ['lh3.googleusercontent.com'],
+    images: {
+        domains: [
+            'lh3.googleusercontent.com',
+            'gs://cellabor-ad333.appspot.com',
+            'firebasestorage.googleapis.com',
+            'scontent-ssn1-1.cdninstagram.com',
+            'scontent.cdninstagram.com', // Instagram의 CDN 도메인을 일반화
+        ],
     },
     distDir: '.next',
     experimental: {

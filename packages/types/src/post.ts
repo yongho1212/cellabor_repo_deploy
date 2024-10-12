@@ -25,4 +25,5 @@ export interface PostInterface {
     meetingDate: Date | string;
     place: string[];
     day?: string[];
+    images?: string[];
 }

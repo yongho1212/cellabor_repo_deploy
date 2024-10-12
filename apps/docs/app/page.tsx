@@ -23,7 +23,6 @@ import { initializeApp } from 'firebase/app';
 import { doc, getDoc, setDoc, getFirestore } from 'firebase/firestore';
 import ReactGA from 'react-ga4';
 
-// Firebase 프로젝트 설정
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,
@@ -80,7 +79,6 @@ export default function Home() {
                     autoPlay={1}
                     duration={0}
                     plugins={plugins}
-                    // panelsPerView={1} // 한 번에 보여줄 패널 수
                 >
                     <div className={styles.carouselItem}>
                         <div className={styles.imageWrapper}>

@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "title": "셀라보 | Cellabor",
+    "desc": "원하는 스타일의 촬영메이트를 쉽게 찾아보세요"
+  },
+  "menu": {
+    "styleManagement": "스타일 관리",
+    "inquiry": "1:1 문의",
+    "terms": "이용 약관",
+    "privacyPolicy": "개인정보처리방침",
+    "logout": "로그아웃",
+    "unsubscribe": "회원탈퇴"
+  },
+  "homeCategories": {
+    "hotel": "호텔/라운지",
+    "exhibition": "전시회",
+    "pool": "수영장",
+    "cafe": "카페",
+    "park": "공원/야외",
+    "studio": "스튜디오 쉐어",
+    "restaurant": "맛집",
+    "event": "이벤트"
+  },
+  "nav": {
+    "home": "홈",
+    "search": "검색",
+    "write": "글쓰기",
+    "profile": "마이페이지",
+    "posts": "포스트"
+  },
+  "common": {
+    "back": "뒤로",
+    "logoAlt": "셀라보 로고"
+  },
+  "home": {
+    "title": "어떤 활동메이트를 구하시나요?",
+    "desc": "나와 비슷한 스타일의 메이트를 만나볼까요?",
+    "sectionTitle1": "이벤트",
+    "sectionTitle2": "최신/인기글 모음"
+  },
+  "search": {
+    "title": "나와 마음맞는 촬영메이트를 찾아보세요",
+    "placeholder": "검색어를 입력하세요",
+    "resCount": "검색결과"
+  },
+  "write": {
+    "title": "글쓰기",
+    "section1Title": "제목",
+    "section1Placeholder": "제목을 입력해 주세요.",
+    "section1Announce": "광고, 불건전한 만남 목적, 종교 단체 관련 글 작성시 제재를 받으실 수 있습니다.",
+    "section2Title": "요일",
+    "section2Placeholder": "촬영을 진행할 요일을 설정해 주세요.",
+    "section3Title": "장소",
+    "section3Placeholder": "촬영을 진행할 장소를 설정해 주세요.",
+    "section4Title": "컨셉(최대 3개)",
+    "section4Placeholder": "촬영을 진행할 컨셉을 설정해 주세요.",
+    "section5Title": "위치(추후 제공 예정)",
+    "section5Placeholder": "추후 제공 예정입니다.",
+    "section6Title": "내용",
+    "section6Placeholder": "간단한 소개와 함께 작성하시면 촬영메이트 신청률이 높아져요 :)",
+    "section7Title": "참고이미지",
+    "section7Placeholder": "이미지를 첨부해주세요!",
+    "submit": "작성완료"
+  },
+  "mypage": {
+    "title": "마이페이지",
+    "settingButton": "설정하기",
+    "igTitle": "인스타그램 연결하기",
+    "igDesc": "인스타그램을 연동하고 나에게 맞는 촬영메이트를 찾아보세요.",
+    "igButton": "인스타그램 계정 연동하기"
+  }
+}

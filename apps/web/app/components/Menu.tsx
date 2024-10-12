@@ -24,11 +24,13 @@ const MenuItem = ({ item }: { item: MenuItemType }) => {
         <div className="flex justify-between items-center">
             {typeof action === 'string' ? (
                 <Link href={action}>
-                    <Typography variant={'subtitle'}>{label}</Typography>
+                    {/* 빌드때문에 ptd_b_20 임시 박음 */}
+                    <Typography variant={'ptd_b_20'}>{label}</Typography>
                 </Link>
             ) : (
                 <button onClick={handleClick}>
-                    <Typography variant={'subtitle'}>{label}</Typography>
+                    {/* 빌드때문에 ptd_b_20 임시 박음 */}
+                    <Typography variant={'ptd_b_20'}>{label}</Typography>
                 </button>
             )}
             <span>&gt;</span>

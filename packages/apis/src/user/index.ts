@@ -10,4 +10,13 @@ export const userApi = {
             throw error;
         }
     },
+    updateUserProfile: async (uid:string, updatedData:any) => {
+        try {
+            const response = await axiosInstance.put(`/user/updateUserProfile/${uid}`, updatedData);
+            return response.data;
+        } catch (error) {
+            console.error('Error updating user profile:', error);
+            throw error;
+        }
+    }
 }
