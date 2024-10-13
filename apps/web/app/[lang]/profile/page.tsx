@@ -18,6 +18,7 @@ import {MdEdit} from "react-icons/md";
 import {ImageType} from '../../apis/images';
 import {useLanguage} from '../../providers/ClientLanguageProvider';
 import dynamic from 'next/dynamic';
+import {HiOutlineHeart} from 'react-icons/hi';
 
 const MyProfilePage = () => {
     const { lang, t } = useLanguage();
@@ -100,6 +101,29 @@ const MyProfilePage = () => {
                         </>
                     )}
                 </div>
+                <div className="grid grid-cols-3 gap-2 w-full mb-4">
+                    {profileData?.instagram?.feeds?.data.map((feed: any) => (
+                        <div key={feed.id} className="relative pt-[100%] group">
+                            <Image
+                                src={feed.media_url}
+                                alt={feed.caption || 'Instagram post'}
+                                layout="fill"
+                                objectFit="cover"
+                                className="rounded-md"
+                            />
+                            <div
+                                className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-md flex items-center justify-center">
+                                <div
+                                    className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ">
+                                    <div className='flex flex-row items-center'>
+                                        <HiOutlineHeart className="mr-1" size={22}/>
+                                        <span className='font-semibold text-lg'>{feed.like_count}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
                 <ImageUploaderWithCrop
                     isOpen={isModalOpen}
@@ -110,7 +134,7 @@ const MyProfilePage = () => {
                 <div className="space-y-2">
                     <Menu items={menuItems}/>
                 </div>
-                <LanguageSwitcher />
+                <LanguageSwitcher/>
             </div>
         </div>
     );
