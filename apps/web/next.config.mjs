@@ -17,6 +17,13 @@ const nextConfig = {
             'scontent-ssn1-1.cdninstagram.com',
             'scontent.cdninstagram.com', // Instagram의 CDN 도메인을 일반화
         ],
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: '**.cdninstagram.com',
+            },
+
+        ],
     },
     distDir: '.next',
     experimental: {

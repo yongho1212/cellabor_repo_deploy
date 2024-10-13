@@ -2,7 +2,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import {fetchPosts} from '../../lib/api';
 import { Locale, getDictionary } from '@repo/i18n';
-import {IconBasicProps} from '@repo/types'
+import {IconBasicProps, PostInterface} from '@repo/types'
 
 
 const Typography = dynamic(() => import('@repo/ui/components/Typography/Typography'), { ssr: false })
@@ -19,12 +19,16 @@ interface PageProps {
 export default async function Home({ params: { lang } }: PageProps) {
     const t = await getDictionary(lang);
     const posts = await fetchPosts();
-
+    const trending = shuffle(posts)
     const iconData: IconBasicProps[] = Object.entries(t.homeCategories).map(([key, label]) => ({
         key,
         label: label as string
     }));
 
+    function shuffle(array: PostInterface[]) {
+        const newArr = [...array].sort(() => Math.random() - 0.5);
+        return newArr;
+    }
 
 
     return (
@@ -37,19 +41,21 @@ export default async function Home({ params: { lang } }: PageProps) {
                 </section>
                 <section className="py-4 ">
                     <Typography variant={'ptd_b_20'} as={'h2'}>{t.home.desc}</Typography>
-                    <div className="-mx-8 ">
+                    <div className="-mx-8 mt-4">
                         <FlickingSlider posts={posts}/>
                     </div>
                 </section>
 
-                <section className="py-4">
-                    <Typography variant={'ptd_b_20'} as={'h2'}>{t.home.sectionTitle1}</Typography>
-                    <div className="bg-gray-200 h-40 rounded-lg"></div>
-                </section>
+                {/*<section className="py-4">*/}
+                {/*    <Typography variant={'ptd_b_20'} as={'h2'}>{t.home.sectionTitle1}</Typography>*/}
+                {/*    <div className="bg-gray-200 h-40 rounded-lg"></div>*/}
+                {/*</section>*/}
 
                 <section className="py-4">
                     <Typography variant={'ptd_b_20'} as={'h2'}>{t.home.sectionTitle2}</Typography>
-                    <div className="bg-gray-200 h-60 rounded-lg"></div>
+                    <div className="-mx-8 mt-4">
+                        <FlickingSlider posts={trending}/>
+                    </div>
                 </section>
 
 

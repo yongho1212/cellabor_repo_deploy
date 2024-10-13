@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { PostInterface } from '../../../../types/src/index';
 import { timeAgo } from '@repo/utils';
+import Typography from '../Typography/Typography';
 
 interface CardProps {
     post: PostInterface;
@@ -21,12 +22,15 @@ const PostCard: React.FC<CardProps> = ({ post, environment, backgroundColor = '#
             borderRadius: 8,
             padding: 16,
             width: '100%',
+            overflow: 'hidden',
+
         },
         title: {
             fontSize: 18,
             fontWeight: 'bold',
             marginBottom: 8,
-        },
+            flexShrink: 1,
+},
         contentContainer: {
             flexDirection: isMobile ? 'column' : 'row',
             justifyContent: 'space-between',
@@ -93,9 +97,9 @@ const PostCard: React.FC<CardProps> = ({ post, environment, backgroundColor = '#
 
     const CardContent = () => (
         <>
-            <Text style={styles.title} numberOfLines={isMobile ? 1 : 2}>{post.title}</Text>
             <View style={styles.contentContainer}>
                 <View style={{ flex: 1 }}>
+                    <Text style={styles.title} numberOfLines={isMobile ? 1 : 2} ellipsizeMode='tail'>{post.title}</Text>
                     <Text style={styles.content} numberOfLines={isMobile ? 2 : 3} ellipsizeMode='tail'>{post.content}</Text>
                 </View>
                 <Image source={{ uri: post.thumbnail }} style={styles.image} />
