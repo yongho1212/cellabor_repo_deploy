@@ -68,5 +68,21 @@
     "igTitle": "Connect Instagram",
     "igDesc": "Link your Instagram and find shooting partners that match you.",
     "igButton": "Link Instagram Account"
+  },
+  "instagramCallback": {
+    "processing": "Processing...",
+    "exchangeCode": "Exchanging authentication code...",
+    "fetchPagesSuccess": "Fetched Facebook pages. Please select a page.",
+    "noPages": "No connected Instagram/Facebook pages found.",
+    "errorExchanging": "Failed to exchange authentication code. Please try again.",
+    "noCode": "No authentication code found.",
+    "fetchingInstagramData": "Fetching Instagram account information...",
+    "fetchInstagramSuccess": "Successfully retrieved Instagram data!",
+    "fetchInstagramError": "Failed to retrieve Instagram data. Please try again.",
+    "checkProfessionalAccount": "Please make sure you are connecting a professional account.",
+    "switchToProfessional": "Please switch your Instagram account to a professional account and try again!",
+    "selectPage": "Select a Facebook Page:",
+    "proceed": "Proceed with selected page",
+    "returnToMain": "Return to Main"
   }
 }

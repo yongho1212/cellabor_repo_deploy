@@ -68,5 +68,21 @@
     "igTitle": "인스타그램 연결하기",
     "igDesc": "인스타그램을 연동하고 나에게 맞는 촬영메이트를 찾아보세요.",
     "igButton": "인스타그램 계정 연동하기"
+  },
+  "instagramCallback": {
+    "processing": "처리 중...",
+    "exchangeCode": "인증 코드 교환 중...",
+    "fetchPagesSuccess": "Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.",
+    "noPages": "연결된 인스타그램/페이스북 페이지가 없습니다.",
+    "errorExchanging": "인증 실패. 다시 시도해주세요.",
+    "noCode": "인증 코드를 찾을 수 없습니다.",
+    "fetchingInstagramData": "Instagram 계정 정보를 가져오는 중...",
+    "fetchInstagramSuccess": "Instagram 데이터 가져오기 성공!",
+    "fetchInstagramError": "Instagram 데이터 가져오기 실패. 다시 시도해주세요.",
+    "checkProfessionalAccount": "연결하는 계정이 프로페셔널 계정인지 확인해주세요",
+    "switchToProfessional": "인스타그램 계정을 프로페셔널 계정으로 전환 후 다시 시도해주세요!",
+    "selectPage": "Facebook 페이지 선택:",
+    "proceed": "선택한 페이지로 진행",
+    "returnToMain": "메인으로"
   }
 }

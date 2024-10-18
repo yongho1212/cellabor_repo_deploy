@@ -27,8 +27,6 @@ const MyProfilePage = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const menuItems: MenuItemType[] = getMenuItems(t, handleLogout);
 
-    console.log(process.env.NODE_ENV === 'development', process.env.NODE_ENV)
-
     const handleImageUploadSuccess = useCallback(async (urls: string[]) => {
         if (user?.uid && urls.length > 0) {
             const updatedProfile = await userApi.updateUserProfile(user.uid, {profileImage: urls[0]});
