@@ -5,7 +5,7 @@ const PROD_BASE_URL = 'https://cellabor-express-2dfb48949b8f.herokuapp.com';
 
 const axiosInstance = axios.create({
     //바꾸고 지워
-    baseURL: process.env.NODE_ENV === '!development' ? DEV_BASE_URL : PROD_BASE_URL,
+    baseURL: process.env.NODE_ENV !== 'development' ? DEV_BASE_URL : PROD_BASE_URL,
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',
