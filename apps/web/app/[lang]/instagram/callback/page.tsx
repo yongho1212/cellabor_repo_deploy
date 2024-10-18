@@ -83,7 +83,7 @@ const InstagramCallback = () => {
         return <Loading />;
     }
 
-    if (status.code === 2) {
+    if (status.code === 2 && pages.length === 0) {
         return (
             <div className='flex flex-col items-center justify-center min-h-screen'>
                 <h1 className="text-2xl font-bold mb-4">{status.message}</h1>
@@ -97,7 +97,7 @@ const InstagramCallback = () => {
     }
 
     return (
-        <div className='flex flex-col items-center justify-center min-h-screen'>
+        <div className='flex flex-col items-center justify-cente'>
             <p className="text-xl mb-6">{status.message}</p>
             {pages.length > 0 && (
                 <div className="w-full max-w-md">
