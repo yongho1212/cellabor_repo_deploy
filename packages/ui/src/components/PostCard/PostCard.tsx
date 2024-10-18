@@ -30,7 +30,7 @@ const PostCard: React.FC<CardProps> = ({ post, environment, backgroundColor = '#
             fontWeight: 'bold',
             marginBottom: 8,
             flexShrink: 1,
-},
+        },
         contentContainer: {
             flexDirection: isMobile ? 'column' : 'row',
             justifyContent: 'space-between',

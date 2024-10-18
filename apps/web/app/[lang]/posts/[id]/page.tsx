@@ -1,12 +1,13 @@
 import Image from 'next/image';
-import { fetchPostById } from '../../../../lib/api';
 import { notFound } from 'next/navigation';
 import { timeAgo } from '@repo/utils';
+import { postsApi } from '@repo/apis'
+
 import React from 'react';
 import Link from 'next/link';
 
 export default async function PostDetail({ params }: { params: { id: string } }) {
-    const post = await fetchPostById(params.id);
+    const post = await postsApi.fetchPostById(params.id);
 
     if (!post) {
         notFound();

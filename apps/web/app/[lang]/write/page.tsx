@@ -14,6 +14,7 @@ import { ImageType } from '../../apis/images';
 import Image from 'next/image';
 import { db } from '../../../firebaseConfig';
 import { useLanguage } from '../../providers/ClientLanguageProvider';
+import { postsApi } from '@repo/apis'
 
 
 type TagCategory = 'dayList' | 'placeList' | 'conceptList';
@@ -142,11 +143,14 @@ const WritePage = () => {
 
         try {
             // 이미지 업로드 시도
-            uploadedImageUrls = (await handleImageUpload(images)) || [];
-            if (uploadedImageUrls.length === 0) {
-                alert('이미지 업로드에 실패했습니다.');
-                return;
+            if (images.length > 0) {
+                uploadedImageUrls = (await handleImageUpload(images)) || [];
+                if (uploadedImageUrls.length === 0) {
+                    alert('이미지 업로드에 실패했습니다.');
+                    return;
+                }
             }
+
 
             // 업로드된 이미지 URL을 newPost 객체에 추가
             const newPost: PostInterface = {
@@ -179,8 +183,7 @@ const WritePage = () => {
                 images: uploadedImageUrls,
             };
 
-            // Firestore에 newPost 저장
-            const docRef = await addDoc(collection(db, 'posts'), newPost);
+            const docRef = await postsApi.createPost(newPost);
             alert('포스트가 성공적으로 저장되었습니다.');
             router.replace('/');
         } catch (error) {

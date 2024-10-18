@@ -1,12 +1,15 @@
 import { Metadata } from 'next';
 import PostCard from '@repo/ui/components/PostCard/PostCard';
 import Link from 'next/link';
-import { fetchPosts } from '../../../lib/api';
+import { postsApi } from '@repo/apis'
+import { PostInterface } from '@repo/types/src';
 
 export const metadata: Metadata = {
     title: '검색 결과',
     description: '게시글 검색 결과 페이지입니다.',
 };
+
+
 
 export default async function Search({
     searchParams,
@@ -16,7 +19,7 @@ export default async function Search({
     const query = searchParams.q || '';
     const filters = Array.isArray(searchParams.filter) ? searchParams.filter : [searchParams.filter].filter(Boolean);
 
-    const searchResults = await fetchPosts(query, filters);
+    const searchResults = await postsApi.fetchPosts(query, filters);
 
     return (
         <div>
