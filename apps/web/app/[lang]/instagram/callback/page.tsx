@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import axiosInstance from '@repo/apis/src/axiosInstance';
-
 import withAuth from '../../../components/withAuth';
-import {useAuth} from '../../../providers/AuthProvider';
+import { useAuth } from '../../../providers/AuthProvider';
 import Loading from '../../../components/Loading';
+import Link from 'next/link';
 
 interface PageProps {
     id: string;
@@ -16,14 +16,11 @@ interface PageProps {
 const InstagramCallback = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [status, setStatus] = useState('처리 중...');
+    const [status, setStatus] = useState({ code: 0, message: '처리 중...' });
     const [pages, setPages] = useState<PageProps[]>([]);
     const [accessToken, setAccessToken] = useState('');
     const [selectedPageId, setSelectedPageId] = useState('');
-    const {user, loading} = useAuth();
-    const [error, setError] = useState('');
-
-
+    const { user, loading } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,21 +28,22 @@ const InstagramCallback = () => {
 
             if (code) {
                 try {
-                    setStatus('인증 코드 교환 중...');
+                    setStatus({ code: 0, message: '인증 코드 교환 중...' });
                     const response = await axiosInstance.post('/instagram/exchangeCode', { code });
-                    setStatus('Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.');
-                    setPages(response.data.pages);
-                    setAccessToken(response.data.accessToken);
+                    if (response.data.pages && response.data.pages.length > 0) {
+                        setStatus({ code: 1, message: 'Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.' });
+                        setPages(response.data.pages);
+                        setAccessToken(response.data.accessToken);
+                    } else {
+                        setStatus({ code: 2, message: '연결된 인스타그램/페이스북 페이지가 없습니다.' });
+                    }
                 } catch (error) {
                     console.error('Error exchanging code for token:', error);
-                    setStatus('인증 실패. 다시 시도해주세요.');
-                    setError('인증 과정에서 오류가 발생했습니다.');
-
+                    setStatus({ code: 2, message: '인증 실패. 다시 시도해주세요.' });
                 }
             } else {
                 console.error('No code found in URL');
-                setStatus('인증 코드를 찾을 수 없습니다.');
-                // router.push('/');
+                setStatus({ code: 2, message: '인증 코드를 찾을 수 없습니다.' });
             }
         };
 
@@ -57,26 +55,27 @@ const InstagramCallback = () => {
             alert('페이지를 선택하세요.');
             return;
         }
-        if (!user && loading){
-            alert('유저정보 받아오는중.. 잠시만 기다려주세요.');
+        if (!user && loading) {
+            alert('유저 정보를 받아오는 중입니다. 잠시만 기다려주세요.');
             return;
         }
 
         try {
-            setStatus('Instagram 계정 정보를 가져오는 중...');
+            setStatus({ code: 0, message: 'Instagram 계정 정보를 가져오는 중...' });
             const response = await axiosInstance.post('/instagram/getInstagramData', {
                 accessToken: accessToken,
                 pageId: selectedPageId,
                 uid: user?.uid,
             });
-            setStatus('Instagram 데이터 가져오기 성공!');
-            router.push('/');
+            if (response.data.success) {
+                setStatus({ code: 1, message: 'Instagram 데이터 가져오기 성공!' });
+                router.push('/');
+            } else {
+                setStatus({ code: 2, message: 'Instagram 프로페셔널 계정이 연결되어 있지 않습니다.' });
+            }
         } catch (error) {
             console.error('Error fetching Instagram data:', error);
-            setStatus('Instagram 데이터 가져오기 실패. 다시 시도해주세요.');
-            setError('Instagram 데이터를 가져오는 중 오류가 발생했습니다. 다시 시도해주세요.');
-
-            // router.push('/');
+            setStatus({ code: 2, message: 'Instagram 데이터 가져오기 실패. 다시 시도해주세요.' });
         }
     };
 
@@ -84,14 +83,25 @@ const InstagramCallback = () => {
         return <Loading />;
     }
 
+    if (status.code === 2) {
+        return (
+            <div className='flex flex-col items-center justify-center min-h-screen'>
+                <h1 className="text-2xl font-bold mb-4">{status.message}</h1>
+                <h2 className="text-lg mb-6">연결하는 계정이 프로페셔널 계정인지 확인해주세요</h2>
+                <h2 className="text-lg mb-6">잠시후 다시 시도해주세요!</h2>
+                <Link href={'/'} className="px-4 py-2 bg-primary text-white rounded-lg font-semibold">
+                    메인으로
+                </Link>
+            </div>
+        );
+    }
+
     return (
-        <div className='flex flex-col items-center justify-center'>
-            <p>{status}</p>
-            {!pages.length && <div>프로페셔널 계정이 없습니다!</div>}
+        <div className='flex flex-col items-center justify-center min-h-screen'>
+            <p className="text-xl mb-6">{status.message}</p>
             {pages.length > 0 && (
-                <div className="w-full ">
+                <div className="w-full max-w-md">
                     <h3 className="text-lg font-semibold mb-4">Facebook 페이지 선택:</h3>
-                    {/*TODO!! 약관동의 페이지 추가*/}
                     <div className="space-y-2 mb-10">
                         {pages.map((page) => (
                             <label key={page.id} className="flex items-center space-x-2 cursor-pointer">
@@ -109,10 +119,10 @@ const InstagramCallback = () => {
                             </label>
                         ))}
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex justify-center">
                         <button
                             onClick={handlePageSelect}
-                            className="mt-4 px-4 py-2 bg-primary text-white rounded-lg m-auto font-semibold"
+                            className="px-6 py-2 bg-primary text-white rounded-lg font-semibold"
                         >
                             선택한 페이지로 진행
                         </button>
@@ -124,4 +134,3 @@ const InstagramCallback = () => {
 };
 
 export default withAuth(InstagramCallback);
-
