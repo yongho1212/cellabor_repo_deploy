@@ -82,7 +82,8 @@ const LoginScreen: React.FC = () => {
       {errorMessage && (
         <Text style={{color: 'red', marginBottom: 12}}>{errorMessage}</Text>
       )}
-      <Typography variant={'text1'}>
+      {/* 빌드 때문에 임시 박음 */}
+      <Typography variant={'ptd_b_20'}>
         내 스타일과 비슷한 메이트를 만나볼까요?
       </Typography>
       <Button title="로그인" onPress={handleLogin} />

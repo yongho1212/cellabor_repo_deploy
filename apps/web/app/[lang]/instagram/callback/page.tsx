@@ -21,6 +21,8 @@ const InstagramCallback = () => {
     const [accessToken, setAccessToken] = useState('');
     const [selectedPageId, setSelectedPageId] = useState('');
     const {user, loading} = useAuth();
+    const [error, setError] = useState('');
+
 
 
     useEffect(() => {
@@ -37,11 +39,13 @@ const InstagramCallback = () => {
                 } catch (error) {
                     console.error('Error exchanging code for token:', error);
                     setStatus('인증 실패. 다시 시도해주세요.');
+                    setError('인증 과정에서 오류가 발생했습니다.');
+
                 }
             } else {
                 console.error('No code found in URL');
                 setStatus('인증 코드를 찾을 수 없습니다.');
-                router.push('/');
+                // router.push('/');
             }
         };
 
@@ -70,6 +74,8 @@ const InstagramCallback = () => {
         } catch (error) {
             console.error('Error fetching Instagram data:', error);
             setStatus('Instagram 데이터 가져오기 실패. 다시 시도해주세요.');
+            setError('Instagram 데이터를 가져오는 중 오류가 발생했습니다. 다시 시도해주세요.');
+
             // router.push('/');
         }
     };
@@ -81,6 +87,7 @@ const InstagramCallback = () => {
     return (
         <div className='flex flex-col items-center justify-center'>
             <p>{status}</p>
+            {!pages.length && <div>프로페셔널 계정이 없습니다!</div>}
             {pages.length > 0 && (
                 <div className="w-full ">
                     <h3 className="text-lg font-semibold mb-4">Facebook 페이지 선택:</h3>
