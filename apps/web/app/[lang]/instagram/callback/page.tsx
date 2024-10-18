@@ -30,25 +30,37 @@ const InstagramCallback = () => {
                 try {
                     setStatus({ code: 0, message: '인증 코드 교환 중...' });
                     const response = await axiosInstance.post('/instagram/exchangeCode', { code });
-                    if (response.data.pages && response.data.pages.length > 0) {
+
+                    if (response.status === 200 && response.data.pages && response.data.pages.length > 0) {
                         setStatus({ code: 1, message: 'Facebook 페이지를 가져왔습니다. 페이지를 선택하세요.' });
                         setPages(response.data.pages);
                         setAccessToken(response.data.accessToken);
-                    } else {
-                        setStatus({ code: 2, message: '연결된 인스타그램/페이스북 페이지가 없습니다.' });
+                    } else if (response.status === 204) {
+                        // 페이지가 없는 경우 상태 메시지 업데이트 및 리디렉션
+                        setStatus({ code: 2, message: response.data.message || '연결된 인스타그램/페이스북 페이지가 없습니다.' });
+                        setTimeout(() => {
+                            router.push('/');
+                        }, 3000); // 3초 후 메인으로 이동
                     }
                 } catch (error) {
                     console.error('Error exchanging code for token:', error);
                     setStatus({ code: 2, message: '인증 실패. 다시 시도해주세요.' });
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 3000); // 3초 후 메인으로 이동
                 }
             } else {
                 console.error('No code found in URL');
                 setStatus({ code: 2, message: '인증 코드를 찾을 수 없습니다.' });
+                setTimeout(() => {
+                    router.push('/');
+                }, 3000); // 3초 후 메인으로 이동
             }
         };
 
         fetchData();
     }, [searchParams, router]);
+
 
     const handlePageSelect = async () => {
         if (!selectedPageId) {
@@ -67,11 +79,9 @@ const InstagramCallback = () => {
                 pageId: selectedPageId,
                 uid: user?.uid,
             });
-            if (response.data.success) {
+            if (response.status === 200) {
                 setStatus({ code: 1, message: 'Instagram 데이터 가져오기 성공!' });
                 router.push('/');
-            } else {
-                setStatus({ code: 2, message: 'Instagram 프로페셔널 계정이 연결되어 있지 않습니다.' });
             }
         } catch (error) {
             console.error('Error fetching Instagram data:', error);
